@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Tutela</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/jquery.js"></script>
+      <script > 
+            function insertar(){
+                $.ajax({
+                type: 'POST'
+                ,url: "crearUsuario"
+                ,data: {nom: $("#nomUser").val(),doc: $("#nomDocument").val(),corr: $("#email").val(),corrcon: $("#emailConfirm").val(),pass: $("#pass").val(),passconfirm: $("#pass2").val()}
+                ,async: true
+                ,cache: false
+                ,success: function (resp) {
+                      alert(resp);
+                    }   
+                });       
+            }
+        </script>
+    </head>
+    <body>
+        <form name="register" onsubmit="insertar();return false;" >
+            
+            <table >
+                <tbody>
+                    <tr>
+                        <td><label>ID:</label></td>
+                        <td><input type="text" id="id" value="" name="id"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label>Nombre de usuario:</label></td>
+                        <td><input type="text" id="nomUser" value="" name="nomUser"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label>Nombre de documento:</label></td>
+                        <td><input type="text" id="nomDocument" value="" name="nomDocument"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label>Email:</label></td>
+                        <td><input type="text" id="email" value="" name="email"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label>Repite Email:</label></td>
+                        <td><input type="text" id="emailConfirm" value="" name="emailConfirm"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label>Contraseña:</label></td>
+                        <td><input type="password" id="pass" value="" name="pass"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label>Repite Contraseña:</label></td>
+                        <td><input type="password" id="pass2" value="" name="pass2"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            &nbsp;
+            <input type="submit" value="Guardar" name="submit"/>&nbsp;
+            <input type="reset" value="Cancelar" name="reset"/>
+            
+            
+        </form>
+    </body>
+</html>

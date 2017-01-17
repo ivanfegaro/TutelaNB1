@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Test Tutela</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="js/jquery.js"></script>
+      <script type="text/javascript"> 
+            $(document).ready(function(){
+                obtenerNombre();
+            });
+            function obtenerNombre(){
+                $.ajax({
+                 type: 'get',
+                url: "ListEstados",
+                async: true,
+                cache: false,
+                success: function (resp) {
+                        $.each(resp,function (indice,datosUsuario){
+                            $("#datosUsuarioS").append($("<option>",{value:datosUsuario.idUsuario,text:datosUsuario.NombreUsuario}));
+                            $("#tabla").append($("<tr>").append("<td>"+datosUsuario.idUsuario+"</td>"
+                                                                +"<td>"+datosUsuario.NombreUsuario+"</td>"));
+                            
+                          
+                        });
+                    }
+                    
+                });
+                 
+            }
+
+        </script>
+    </head>
+    <body >
+        <select name="nombre" id="datosUsuarioS">
+            <option value="">Elige un nombre</option>
+        </select>
+        
+        <table border="1" id="tabla">
+            <thead>
+                <tr>
+                    <th>clave</th>
+                    <th>entidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+
+    </body>
+</html>

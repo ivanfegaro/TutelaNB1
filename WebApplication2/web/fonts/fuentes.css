@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'robotoCondensed';
+    src: url('RobotoCondensed.ttf') format('ttf'),
+		 url('robotocondensed-webfont.woff2') format('woff2'),
+         url('robotocondensed-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'robotoSlab';
+    src: url('RobotoSlab.ttf') format('ttf'),
+		 url('robotoslab-webfont.woff2') format('woff2'),
+         url('robotoslab-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}

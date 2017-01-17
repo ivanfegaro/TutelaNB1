@@ -8,7 +8,10 @@ package com.autenti.view;
 import com.autentic.entities.datosUsuario;
 import com.autentic.model.ConexionSinglenton;
 import com.google.gson.Gson;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,6 +28,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class ListCrearServlet2 extends HttpServlet {
     
@@ -146,4 +156,26 @@ public class ListCrearServlet2 extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    
+    
+         public void ReportePDF() throws SQLException, JRException{
+        Connection a;
+        a=DriverManager.getConnection("jdbc:mysql://localhost/tutela", "root","root");
+        JasperReport reporte = null;
+        reporte = (JasperReport) JRLoader.loadObjectFromFile("C:\\Users\\ivanf\\Documents\\NetBeansProjects\\tutelaNB\\PDF\\src\\main\\java\\reporte\\reporte\\report2.jasper");
+        JasperPrint print = JasperFillManager.fillReport(reporte, null, a);
+        JasperViewer ver = new JasperViewer(print);
+        ver.setTitle("Tutela");
+        ver.setVisible(true);
+
+        try{
+            
+            OutputStream output = new FileOutputStream(new File("C:\\Users\\ivanf\\Documents\\NetBeansProjects\\tutelaNB\\PDF\\tutela.pdf"));
+            JasperExportManager.exportReportToPdfStream(print, output);
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        
+    }
 }

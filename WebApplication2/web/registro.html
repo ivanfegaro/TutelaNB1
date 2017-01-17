@@ -48,6 +48,7 @@
                 ,cache: false
                 ,success: function (resp) {
                       alert(resp);
+                      
                     }   
                 });       
             }
@@ -125,7 +126,7 @@ End Fixed Navigation
 			<div class="devider"><i class="fa fa-gavel fa-lg"></i></div>
 
 		</div>
-		<form name="registerForm"  onsubmit="insertar();return false;">
+            <form name="registerForm"  onsubmit="insertar();return false;" id="registerForm" action="confirmacion.html">
 			<div class="form_sitio">
 				<div class="col-md-12">
 
@@ -165,7 +166,7 @@ End Fixed Navigation
 						</div>
 					</div>
 					<div class="text-center">
-                                                <input type="submit" value="registrate" name="submit" class="btn btn-td btn-square"/>
+                                            <input type="submit" value="registrate" name="submit" class="btn btn-td btn-square" onclick="location.href = 'confirmacion.html';"/>
 					</div>
 
 				</div>

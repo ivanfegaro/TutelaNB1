@@ -36,8 +36,7 @@ public class ListEstadosServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            
+
             out.println(getEstados());
         }catch(Exception e){
             

@@ -37,7 +37,32 @@
     <link rel="stylesheet" href="css/media-queries.css">
 
     <!-- Modernizer Script for old Browsers -->
-    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script src="js/jquery.js"></script>
+          <script > 
+            function confirmar(){
+                $.ajax({
+                type: 'get'
+                ,url: "codigoConfirm"
+                ,data: {codigo: $("#codigo").val()}
+                ,async: true
+                ,cache: false
+                ,success: function (resp) {
+                    var codi = "Codigo validado\r\n";
+                    if(resp === codi){
+                        redireccionar();
+                        alert(resp);
+                    }else{
+                        alert(resp); 
+                    }
+                    }   
+                });       
+            }
+            var pagina="iniciar-sesion.html";
+            function redireccionar(){
+                location.href = pagina
+            }
+            
+        </script>
 
 </head>
 <body id="body">
@@ -59,18 +84,12 @@ Fixed Navigation
                 <i class="fa fa-bars fa-2x"></i>
             </button>
             <!-- /responsive nav button -->
-
             <!-- logo -->
             <a class="navbar-brand" href="index.html">
-
                 <img class="logotipo" src="img/logotipo-tuteladigital-darkbg.svg" alt="Tutela Digital">
-
             </a>
             <!-- /logo -->
         </div>
-
-
-
     </div>
 </header>
 
@@ -86,22 +105,20 @@ Fixed Navigation
                 <div class="devider"><i class="fa fa-gavel fa-lg"></i></div>
 
             </div>
-            <form action="">
+            <form name="confirmacion" onsubmit="confirmar();return false;" id="confirmacion" >
                 <div class="form_sitio">
                     <div class="cont-form-sm center-block">
                         <p>Por favor, ingresa el código de confirmación enviado a tu correo electrónico.</p>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label for="">Código</label>
-                                    <input type="text" class="form-control">
+                                    <label >Código</label>
+                                    <input type="text" class="form-control" id="codigo">
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="text-center">
-                            <a class="btn btn-td btn-square" role="button" href="usuario/cuenta-usuario.php" >Enviar</a>
+                           <input type="submit" value="Enviar" name="submit" class="btn btn-td btn-square" />
                         </div>
                     </div>
 

@@ -25,9 +25,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -36,37 +38,50 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+@WebServlet("/CrearSession")
 public class ListCrearServlet2 extends HttpServlet {
     
-    public void CreateUser(String nombre,String cedula,  String email, String emailC, String pass, String passC) throws ClassNotFoundException, SQLException{
-        String sql = "Insert into usuarion (name_user,document,email,emailC,pass,passC) VALUES (?,?,?,?,?,?)";
+    private static final long serialVersionUID = 1L;
+    public String aleatorio;
+    public String correo;
+    
+    protected void doget(HttpServletRequest request, HttpServletResponse response){
+       HttpSession misession= request.getSession(true); 
+         
+    }
+    
+    public void CreateUser(String alias,String cedula,String email, String pass) throws ClassNotFoundException, SQLException{
+        
+        String sql = "Insert into usuarion (alias_usuario,password_usuario,estado_usuario,numero_identificacion,correo,codigo_confirmacion) VALUES (?,?,?,?,?,?)";
         PreparedStatement ps = ConexionSinglenton.openConection().prepareCall(sql);
-        ps.setString(1, nombre);
-        ps.setString(2, cedula);
-        ps.setString(3, email);
-        ps.setString(4, emailC);
-        ps.setString(5, pass);
-        ps.setString(6, passC);
+        ps.setString(1, alias);
+        ps.setString(2, pass);
+        ps.setString(3, "P");
+        ps.setString(4, cedula);
+        ps.setString(5, email);
+        ps.setString(6, aleatorio);
         ps.execute();
       
     }
+    
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try  {
-           
+            correo = request.getParameter("corr");
+           this.enviarCorreo();
             CreateUser(request.getParameter("nom"),
                     request.getParameter("doc"),
                     request.getParameter("corr"),
-                    request.getParameter("corrcon"),
-                    request.getParameter("pass"),
-                    request.getParameter("passconfirm"));
+                    request.getParameter("pass")
+                    );
             
             out.println("registro exitoso");
-        }catch(Exception e){
             
+        }catch(Exception e){
+            out.println("registro no exitoso");
             e.printStackTrace();
  
         }
@@ -78,14 +93,15 @@ public class ListCrearServlet2 extends HttpServlet {
         try{
             Random rnd = new Random();
             int dig5 = rnd.nextInt(90000)+10000;
+            aleatorio = String.valueOf(dig5);
 
             String host ="smtp.gmail.com" ;
             String user = "ivanfegaro@gmail.com";
             String pass = "fnwrsnxgjxadllbj";
-            String to = "ivan.garcia@autentic.com.co";
+            String to = correo;
             String from = "ivanfegaro@gmail.com";
             String subject = "Clave de confirmacion";
-            String messageText = "Por favor inserte este codigo para activar su Cuenta:" + dig5;
+            String messageText = "Por favor inserte este codigo para activar su Cuenta:" + aleatorio;
             boolean sessionDebug = false;
 
             Properties props = System.getProperties();
@@ -110,7 +126,7 @@ public class ListCrearServlet2 extends HttpServlet {
             transport.connect(host, user, pass);
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
-            System.out.println("message send successfully");
+            System.out.println("message send successfully" + correo);
         }catch(Exception ex)
         {
             System.out.println(ex);
@@ -178,4 +194,24 @@ public class ListCrearServlet2 extends HttpServlet {
         }
         
     }
+
+    public String getAleatorio() {
+        return aleatorio;
+    }
+
+    public void setAleatorio(String aleatorio) {
+        this.aleatorio = aleatorio;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+    
+    
+         
+         
 }

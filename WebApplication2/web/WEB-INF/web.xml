@@ -8,6 +8,10 @@
         <servlet-name>ListCrearServlet2</servlet-name>
         <servlet-class>com.autenti.view.ListCrearServlet2</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CodigoConfirmServlet</servlet-name>
+        <servlet-class>com.autenti.view.CodigoConfirmServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListEstadosServlet</servlet-name>
         <url-pattern>/ListEstados</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ListCrearServlet2</servlet-name>
         <url-pattern>/crearUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CodigoConfirmServlet</servlet-name>
+        <url-pattern>/codigoConfirm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

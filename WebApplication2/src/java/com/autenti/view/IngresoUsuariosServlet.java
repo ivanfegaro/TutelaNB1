@@ -18,35 +18,38 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ivanf
  */
 public class IngresoUsuariosServlet extends HttpServlet {
-    
+    private static final long serialVersionUID = 1L;
     int numRows = 0;
+    ArrayList<Usuario> arrayDatos  = new ArrayList<>();
 
     public void ingresar(String user, String pass) throws ClassNotFoundException, SQLException{
         //String sql = "SELECT * FROM tutela.usuarion where alias_usuario = 'ivan.garcia' and password_usuario = '1234' and estado_usuario = 'A';";
         String sql = "SELECT * FROM tutela.usuarion where alias_usuario = '"+ user + "' and password_usuario = '"+ pass + "' and estado_usuario = 'A';";
         Statement st = ConexionSinglenton.openConection().createStatement();
          ResultSet rs =  st.executeQuery(sql);
-          ArrayList<Usuario> arrayDatos  = new ArrayList<>();
+
           rs.last();
           numRows = rs.getRow();
           rs.beforeFirst();
           out.print(numRows);
-         /* 
+         
           while (rs.next()){
             arrayDatos.add(new Usuario(rs.getInt("id"), rs.getString("alias_usuario"), rs.getString("password_usuario"),
                   rs.getString("estado_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"),rs.getString("numero_identificacion"), rs.getString("direccion"), rs.getInt("celular"), rs.getString("correo"), rs.getString("codigo_confirmacion")));
     }
           
-          return new Gson().toJson(arrayDatos); */
+        //  return new Gson().toJson(arrayDatos); 
           
     }
     
@@ -55,6 +58,8 @@ public class IngresoUsuariosServlet extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+         // HttpSession misession= request.getSession(true);
+         // misession.setAttribute("usuario", arrayDatos);
           
             ingresar(request.getParameter("user"),request.getParameter("pass"));
             if (numRows == 0){

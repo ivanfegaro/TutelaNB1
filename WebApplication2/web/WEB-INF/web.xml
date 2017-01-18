@@ -16,6 +16,10 @@
         <servlet-name>IngresoUsuariosServlet</servlet-name>
         <servlet-class>com.autenti.view.IngresoUsuariosServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TutelaServlet</servlet-name>
+        <servlet-class>com.autenti.view.TutelaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListEstadosServlet</servlet-name>
         <url-pattern>/ListEstados</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>IngresoUsuariosServlet</servlet-name>
         <url-pattern>/loginUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TutelaServlet</servlet-name>
+        <url-pattern>/tutelaS</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

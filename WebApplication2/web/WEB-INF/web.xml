@@ -12,6 +12,10 @@
         <servlet-name>CodigoConfirmServlet</servlet-name>
         <servlet-class>com.autenti.view.CodigoConfirmServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>IngresoUsuariosServlet</servlet-name>
+        <servlet-class>com.autenti.view.IngresoUsuariosServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListEstadosServlet</servlet-name>
         <url-pattern>/ListEstados</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>CodigoConfirmServlet</servlet-name>
         <url-pattern>/codigoConfirm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IngresoUsuariosServlet</servlet-name>
+        <url-pattern>/loginUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

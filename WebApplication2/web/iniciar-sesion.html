@@ -37,7 +37,35 @@
         <link rel="stylesheet" href="css/media-queries.css">
 
 		<!-- Modernizer Script for old Browsers -->
-        <script src="js/modernizr-2.6.2.min.js"></script>
+        <script src="js/jquery.js"></script>
+          <script> 
+            function login(){
+                
+                $.ajax({
+                type: 'POST'
+                ,url: "loginUser"
+                ,data: {user: $("#alias").val(),pass: $("#pass").val()}
+                ,async: true
+                ,cache: false
+                ,success: function (resp) {
+                    var comp="Ingreso correctamente\r\n";
+                    if (resp === comp){
+                      alert(resp);
+                      redireccionar();
+                    }else {
+                      alert(resp);  
+                    }
+                    }   
+                });       
+            }
+            
+            var pagina="index_1.html";
+            function redireccionar(){
+                location.href = pagina;
+            }
+        </script>
+        
+        
 
     </head>
     <body id="body">
@@ -93,7 +121,7 @@
         			</div>
         			<div class="col-md-6 text-right">
         				<ul class="breadcrumbsPag">
-        					<li><a href="index.html">Inicio</a></li> |
+        					<li><a href="index.html">Inicio</a></li> 
         					<li><a href="#"></a>Iniciar Sesión</li>
         				</ul>
         				
@@ -111,7 +139,8 @@
 					<div class="devider"><i class="fa fa-gavel fa-lg"></i></div>
 						
 				</div>
-        		<form action="">
+        		<form name="loginform"  onsubmit="login();return false;" id="loginform">
+                            
         			<div class="form_sitio">
         				<div class="col-md-6">
         					<img src="img/comp_ley.png" alt="Juticia Digital" class="img-responsive" style="padding:40px 0;">
@@ -121,31 +150,20 @@
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-12">
-										<label for="">Nombre de Usuario ó E-mail</label>
-										<input type="text" class="form-control">
+										<label >Nombre de Usuario ó E-mail</label>
+                                                                                <input type="text" class="form-control" id="alias">
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-12">
-										<label for="">Contraseña</label>
-										<input type="password" class="form-control square">
+										<label >Contraseña</label>
+                                                                                <input type="password" class="form-control square" id="pass">
 									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-md-12">
-										<label for="">Eres</label>
-										<select name="" id="" class="form-control square">
-											<option value="Selecciona">[Selecciona...]</option>
-											<option value="Usuario" selected="selected">Usuario</option>
-											<option value="Juez">Juez</option>
-										</select>
-									</div>
-								</div>
-							</div>
+							
      						<div class="form-group">
 								<div class="row">
 									<div class="col-md-12">
@@ -154,7 +172,8 @@
 								</div>
 							</div>
 							<div class="text-center">
-								<a class="btn btn-td btn-square" role="button" href="usuario/cuenta-usuario.php" >Inicia Sesión</a>
+								
+                                                                 <input type="submit" value="Inicia Sesión" name="submit" class="btn btn-td btn-square" />
 						  	</div>
       					</div>
       					<section class="col-md-12">

@@ -47,10 +47,20 @@
                 ,async: true
                 ,cache: false
                 ,success: function (resp) {
+                    var comp="registro exitoso\r\n";
+                    if (resp === comp){
                       alert(resp);
-                      
+                      redireccionar();
+                    }else {
+                      alert(resp);  
+                    }
                     }   
                 });       
+            }
+            
+            var pagina="confirmacion.html";
+            function redireccionar(){
+                location.href = pagina;
             }
         </script>
 
@@ -126,7 +136,7 @@ End Fixed Navigation
 			<div class="devider"><i class="fa fa-gavel fa-lg"></i></div>
 
 		</div>
-            <form name="registerForm"  onsubmit="insertar();return false;" id="registerForm" action="confirmacion.html">
+            <form name="registerForm"  onsubmit="insertar();return false;" id="registerForm" >
 			<div class="form_sitio">
 				<div class="col-md-12">
 

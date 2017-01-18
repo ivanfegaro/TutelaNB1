@@ -44,6 +44,7 @@ public class ListCrearServlet2 extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public String aleatorio;
     public String correo;
+    public boolean validacion = false;
     
     protected void doget(HttpServletRequest request, HttpServletResponse response){
        HttpSession misession= request.getSession(true); 
@@ -61,7 +62,7 @@ public class ListCrearServlet2 extends HttpServlet {
         ps.setString(5, email);
         ps.setString(6, aleatorio);
         ps.execute();
-      
+        validacion = true;
     }
     
 
@@ -77,11 +78,15 @@ public class ListCrearServlet2 extends HttpServlet {
                     request.getParameter("corr"),
                     request.getParameter("pass")
                     );
+            if (validacion == true){
+                out.println("registro exitoso");
+            }else {
+                out.println("error");
+            }
             
-            out.println("registro exitoso");
             
         }catch(Exception e){
-            out.println("registro no exitoso");
+            
             e.printStackTrace();
  
         }
